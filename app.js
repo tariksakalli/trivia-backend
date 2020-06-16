@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 
 const app = express();
+const adminRoutes = require('./api/routes/admin');
 
 // eslint-disable-next-line consistent-return
 app.use((req, res, next) => {
@@ -18,7 +19,9 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use('/admin', adminRoutes);
+
 app.listen(process.env.APP_PORT, () => {
   // eslint-disable-next-line no-console
-  console.log(`Server runnun on port: ${process.env.APP_PORT}`);
+  console.log(`Server runing on port: ${process.env.APP_PORT}`);
 });
