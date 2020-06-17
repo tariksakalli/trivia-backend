@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const adminRoutes = require('./api/routes/admin');
 const authRoutes = require('./api/routes/auth');
+const userRoutes = require('./api/routes/user');
 
 // eslint-disable-next-line consistent-return
 app.use((req, res, next) => {
@@ -24,6 +25,7 @@ app.use(bodyParser.json());
 
 app.use('/admin', adminRoutes);
 app.use('/auth', authRoutes);
+app.use('/user', userRoutes);
 
 app.listen(process.env.APP_PORT, () => {
   // eslint-disable-next-line no-console

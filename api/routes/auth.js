@@ -22,7 +22,7 @@ router.post('/login', (req, res) => {
         password: data[0].password,
       };
       const userInfo = data[0];
-      const token = jwt.sign({ loginInfo }, process.env.JWT_KEY);
+      const token = jwt.sign({ loginInfo }, process.env.JWT_KEY, { expiresIn: '60m' });
       res.json({
         token,
         userInfo,
