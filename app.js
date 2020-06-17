@@ -1,8 +1,10 @@
 require('dotenv').config();
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
 const adminRoutes = require('./api/routes/admin');
+const authRoutes = require('./api/routes/auth');
 
 // eslint-disable-next-line consistent-return
 app.use((req, res, next) => {
@@ -18,8 +20,10 @@ app.use((req, res, next) => {
   }
   next();
 });
+app.use(bodyParser.json());
 
 app.use('/admin', adminRoutes);
+app.use('/auth', authRoutes);
 
 app.listen(process.env.APP_PORT, () => {
   // eslint-disable-next-line no-console
