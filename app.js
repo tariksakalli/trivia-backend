@@ -1,4 +1,6 @@
 require('dotenv').config();
+const https = require('https');
+const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -14,6 +16,7 @@ app.use((req, res, next) => {
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept, Authorization',
   );
+  res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
 
   if (req.method === 'OPTIONS') {
     res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
@@ -27,7 +30,10 @@ app.use('/admin', adminRoutes);
 app.use('/auth', authRoutes);
 app.use('/user', userRoutes);
 
-app.listen(process.env.APP_PORT, () => {
+https.createServer({
+  key: fs.readFileSync('./config/cert/localhost.local-key.pem'),
+  cert: fs.readFileSync('./config/cert/localhost.local.pem'),
+}, app).listen(process.env.APP_PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`Server runing on port: ${process.env.APP_PORT}`);
 });
