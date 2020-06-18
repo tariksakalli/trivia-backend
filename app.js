@@ -8,6 +8,7 @@ const app = express();
 const adminRoutes = require('./api/routes/admin');
 const authRoutes = require('./api/routes/auth');
 const userRoutes = require('./api/routes/user');
+const testsRoutes = require('./api/routes/tests');
 
 // eslint-disable-next-line consistent-return
 app.use((req, res, next) => {
@@ -29,6 +30,7 @@ app.use(bodyParser.json());
 app.use('/admin', adminRoutes);
 app.use('/auth', authRoutes);
 app.use('/user', userRoutes);
+app.use('/tests', testsRoutes);
 
 https.createServer({
   key: fs.readFileSync('./config/cert/localhost.local-key.pem'),
