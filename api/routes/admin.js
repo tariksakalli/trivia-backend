@@ -14,7 +14,7 @@ router.get('/students', verifyToken, (req, res) => {
   });
 });
 
-router.get('/recall-listening', verifyToken, (req, res) => {
+router.get('/test-results', verifyToken, (req, res) => {
   const sql = 'SELECT * FROM tests';
   pool.query(sql, (err, data) => {
     if (err) {
