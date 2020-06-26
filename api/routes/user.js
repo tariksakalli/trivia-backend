@@ -35,4 +35,18 @@ router.post('/test-result', verifyToken, (req, res) => {
     });
 });
 
+router.post('/tests-completed', verifyToken, (req, res) => {
+  const sql = 'UPDATE students SET tests_completed=? WHERE name=?';
+  const params = { ...req.body };
+  pool.query(sql,
+    [params.testStatus, params.username],
+    (err, result) => {
+      if (err) {
+        res.status(404).json({ message: err });
+      } else if (result) {
+        res.send(result);
+      }
+    });
+});
+
 module.exports = router;
