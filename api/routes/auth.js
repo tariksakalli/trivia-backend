@@ -16,6 +16,10 @@ router.post('/login', (req, res) => {
       res.status(401).json({
         message: 'Kullanıcı adı / şifre hatalı',
       });
+    } else if (data[0].tests_completed) {
+      res.status(403).json({
+        message: 'Testleri tamamladınız',
+      });
     } else {
       const loginInfo = {
         name: data[0].name,
